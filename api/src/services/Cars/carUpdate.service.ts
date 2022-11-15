@@ -19,9 +19,7 @@ const carUpdateService = async ({
 
   if (filename) {
     unlinkSync(`./uploads/${car.photo}`);
-    const time = new Date().getTime();
-    const photoUpdate = `file/${time}_${filename}`;
-    car.photo = photoUpdate;
+    car.photo = filename;
   }
 
   model ? (car.model = model) : car.model;
