@@ -8,7 +8,6 @@ export default class CarController {
   static async create(req: Request, res: Response) {
     const { km, mark, model, year } = req.body;
 
-    console.log(req.body);
 
     const filename = req.file;
     if (filename) {
@@ -33,25 +32,26 @@ export default class CarController {
 
   static async update(req: Request, res: Response) {
     const { id } = req.params;
-    const { km, mark, model, filename, year } = req.body;
+    const { km, mark, model, year } = req.body;
+    const filename = req.file;
 
-    const car = await carUpdateService({
-      km,
-      mark,
-      model,
-      filename,
-      year,
-      id,
-    });
-
-    return res.status(200).json(car);
+    if (filename) {
+      const car = await carUpdateService({
+        km,
+        mark,
+        model,
+        filename,
+        year,
+        id,
+      });
+      return res.status(200).json(car);
+    }
   }
 
   static async delete(req: Request, res: Response) {
     const { id } = req.params;
 
     await carDeleteService(id);
-    return res.status(204);
-  
+    return res.status(204).json();
   }
 }

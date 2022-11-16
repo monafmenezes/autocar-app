@@ -16,17 +16,13 @@ const carUpdateService = async ({
 }: ICarUpdate) => {
   const carRepository = AppDataSource.getRepository(Car);
   const car = await carRepository.findOne({ where: { id } });
-  const originalPath = path.resolve("tmp", filename);
-
-  console.log(originalPath);
-
   if (!car) throw new AppError("Id not found.", 404);
 
   if (filename) {
     const s3Storage = new S3Storage();
     await s3Storage.deleteFile(car.photo);
-    await s3Storage.saveFile(filename);
-    car.photo = filename;
+    await s3Storage.saveFile(filename.filename);
+    car.photo = filename.filename;
   }
 
   model ? (car.model = model) : car.model;
@@ -36,7 +32,6 @@ const carUpdateService = async ({
 
   await carRepository.save(car);
 
-  await fs.promises.unlink(originalPath);
 
   return car;
 };

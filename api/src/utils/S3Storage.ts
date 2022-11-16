@@ -45,6 +45,7 @@ class S3Storage {
       })
       .promise();
   }
+  
 }
 
 export default S3Storage;

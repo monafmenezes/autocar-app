@@ -9,21 +9,27 @@ const carRoutes = Router();
 
 const upload = multer(multerConfig);
 
-carRoutes.post("/", upload.single("file"), CarController.create);
+carRoutes.post(
+  "/",
+  userAuthMiddleware,
+  checkAdmMiddleware,
+  upload.single("file"),
+  CarController.create
+);
 carRoutes.get("/:id", CarController.list);
 carRoutes.get("/", CarController.index);
 carRoutes.patch(
   "/:id",
-  upload.single("file"),
   userAuthMiddleware,
   checkAdmMiddleware,
+  upload.single("file"),
   CarController.update
 );
 carRoutes.delete(
   "/:id",
-  upload.single("file"),
   userAuthMiddleware,
   checkAdmMiddleware,
+  upload.single("file"),
   CarController.delete
 );
 

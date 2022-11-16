@@ -13,7 +13,7 @@ export interface ICar extends ICarCreate {
 export interface ICarUpdate {
   mark: string;
   model: string;
-  filename: string;
+  filename:Express.Multer.File;
   year: string;
   km: string;
   id: string;
