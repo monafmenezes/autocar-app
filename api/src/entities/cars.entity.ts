@@ -6,7 +6,7 @@ import {
 } from "typeorm";
 
 @Entity("cars")
-export class User {
+export class Car {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
