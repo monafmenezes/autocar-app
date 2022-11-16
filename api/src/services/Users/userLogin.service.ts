@@ -12,9 +12,11 @@ const userLogin = async ({ email, password }: IUserSession) => {
 
   if (!user) throw new AppError("Username or password is invalid");
 
+  
   const comparePassword = await compare(password, user.password);
-
+  
   if (!comparePassword) throw new AppError("Username or password is invalid");
+  
 
   const token = sign({}, process.env.SECRET_KEY || "default", {
     subject: user.id,

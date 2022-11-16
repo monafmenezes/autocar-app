@@ -14,6 +14,7 @@ userRoutes.post(
   validateUserCreation(createUserSchema),
   UserController.store
 );
+userRoutes.post("/login", UserController.login);
 userRoutes.get(
   "/",
   userAuthMiddleware,

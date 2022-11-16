@@ -17,6 +17,7 @@ export default class UserController {
   static async login(req: Request, res: Response) {
     const {email, password} = req.body;
     const login = await userLogin({email, password})
+    return res.json(login);
   }
 
   static async index(req: Request, res: Response) {
