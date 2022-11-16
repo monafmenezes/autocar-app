@@ -3,7 +3,7 @@ export interface ICarCreate {
   model: string;
   year: string;
   km: string;
-  filename?: string;
+  filename:  Express.Multer.File;
 }
 
 export interface ICar extends ICarCreate {

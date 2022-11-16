@@ -4,6 +4,7 @@ import deleteUserService from "../services/Users/userDelete.service";
 import listUserService from "../services/Users/userList.service";
 import listUsersService from "../services/Users/usersList.service";
 import updateUserService from "../services/Users/userUpdate.service";
+import userLogin from "../services/Users/userLogin.service";
 
 export default class UserController {
   static async store(req: Request, res: Response) {
@@ -11,6 +12,11 @@ export default class UserController {
     const user = await createUserService({ name, password, isAdmin, email });
 
     return res.status(201).json(user);
+  }
+
+  static async login(req: Request, res: Response) {
+    const {email, password} = req.body;
+    const login = await userLogin({email, password})
   }
 
   static async index(req: Request, res: Response) {
