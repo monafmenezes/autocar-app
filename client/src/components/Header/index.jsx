@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
-import { AudioOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import Search from "antd/lib/transfer/search";
+import { userContext } from "../../providers/User";
+import { useContext } from "react";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
+  const { user } = useContext(userContext);
   return (
-    <header className="container">
-      <div className=" w-full mx-auto p-4 px-10 flex justify-between items-center">
+    <header>
+      <div className=" w-full mx-auto p-4 px-10 flex justify-between items-center ">
         <h1 className="font-poppins text-xl">AutoCar</h1>
 
-        <nav className="flex items-center justify-between w-2/5">
+        <nav className="flex items-center justify-between w-2/4">
           <Link className="text-sm font-semibold" to="/carros-usados">
             Comprar carro
           </Link>
@@ -21,8 +25,8 @@ const Header = () => {
           <Link className="text-sm font-semibold" to="/">
             Sobre nós
           </Link>
-          <Link className="flex items-center font-semibold text-sm" to="/">
-            <UserOutlined className="mr-2" /> Cadastre-se
+          <Link className="flex font-semibold text-sm" to="/login-admin">
+            <FaUserCircle size={20} className="mr-2" /> {user ? user.name :  'Admin Login'}
           </Link>
         </nav>
       </div>

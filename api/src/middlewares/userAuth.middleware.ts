@@ -9,9 +9,7 @@ const userAuthMiddleware = async (
 ) => {
   let jwtToken = req.headers.authorization;
 
-  if (!jwtToken) {
-    throw new AppError("Missing authorization headers", 404);
-  }
+  if (!jwtToken) throw new AppError("Missing authorization headers", 404);
 
   try {
     const [, token] = jwtToken?.split(" ");

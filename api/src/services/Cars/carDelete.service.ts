@@ -12,7 +12,7 @@ const carDeleteService = async (id: string) => {
   const s3Storage = new S3Storage();
   await s3Storage.deleteFile(car.photo)
 
-  await carRepository.delete(car);
+  await carRepository.delete(id);
 
   return true;
 };

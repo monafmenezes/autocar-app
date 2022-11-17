@@ -22,6 +22,9 @@ module.exports = {
       'xl': '1280px',
       '2xl': '1536px',
     },
+    borderRadius: {
+      DEFAULT: '4px',
+    },
     extend: {},
   },
   plugins: [],

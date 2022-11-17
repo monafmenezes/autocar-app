@@ -12,6 +12,7 @@ const carUpdateService = async ({
   model,
   filename,
   year,
+  price,
   id,
 }: ICarUpdate) => {
   const carRepository = AppDataSource.getRepository(Car);
@@ -29,9 +30,9 @@ const carUpdateService = async ({
   mark ? (car.mark = mark) : car.mark;
   km ? (car.km = parseInt(km)) : car.km;
   year ? (car.year = year) : car.year;
+  price ? (car.price = parseInt(price)) : car.price;
 
   await carRepository.save(car);
-
 
   return car;
 };
