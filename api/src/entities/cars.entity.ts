@@ -22,6 +22,9 @@ export class Car {
   @Column()
   km: number;
 
+  @Column()
+  price: number;
+
   @CreateDateColumn({ type: "timestamp" })
   created: Date;
 

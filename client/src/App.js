@@ -1,9 +1,13 @@
 
+import Header from "./components/Header";
+import RoutesPages from "./routes";
+
 
 function App() {
   return (
-    <div>
-      
+    <div> 
+      <Header/>
+      <RoutesPages/>
     </div>
   );
 }
