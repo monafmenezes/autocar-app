@@ -9,23 +9,16 @@ export const CarProvider = ({ children }) => {
   const [load, setLoad] = useState(false);
   const token = JSON.parse(localStorage.getItem("token"));
 
-  const createCar = ({ km, mark, model, year, price, photo }) => {
-  
-    const params = { km, mark, model, year, price };
-    const FormData = photo;
+  const createCar = (formData) => {
 
     api
-      .post(
-        "car",
-        params,
-        { env: { FormData } },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then(() => {
+      .post("car", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
         toast.success("Deu tudo certo!");
       })
       .catch((err) => {

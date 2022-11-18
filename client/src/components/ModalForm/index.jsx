@@ -6,12 +6,23 @@ import { CarContext } from "../../providers/cars";
 const ModalForm = ({ open, setOpen }) => {
   const { createCar } = useContext(CarContext);
   const [file, setFile] = useState([]);
-  const up = (event) => {
-    console.log(file)
-    setFile(event.file);
+  const up = async (event) => {
+    setFile(event.target.files[0]);
   };
-  const handleSubmit = ({ model, mark, year, km }) => {
-    createCar({ model, mark, year, km, file });
+  const handleSubmit = ({ model, mark, year, km, price }) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("model", model);
+      formData.append("mark", mark);
+      formData.append("year", year);
+      formData.append("km", km);
+      formData.append("price", price);
+      createCar(formData);
+      setOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Modal
@@ -42,11 +53,12 @@ const ModalForm = ({ open, setOpen }) => {
         <Form.Item name="price" label="Preço">
           <Input placeholder="Informe preço" />
         </Form.Item>
-        <Upload onChange={(e) => up(e)}>
+        {/* <Upload onChange={(e) => up(e)}>
           <Button danger className="mb-4">
             Upload
           </Button>
-        </Upload>
+        </Upload> */}
+        <input type="file" onChange={(e) => up(e)} />
         <Form.Item>
           <Button className="mt-4" type="primary" htmlType="submit" block>
             Enviar
