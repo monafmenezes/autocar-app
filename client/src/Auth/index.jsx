@@ -17,7 +17,7 @@ const authService = {
     if (!token) return null;
 
     try {
-      const tokenJwt = JSON.parse(token);
+      const tokenJwt = JSON.stringify(token);
       return tokenJwt;
     } catch (error) {
       return null;

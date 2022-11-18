@@ -21,6 +21,8 @@ const LoginAdmin = () => {
       if (user.data.isAdmin === true) {
         navigate("/admin");
         toast.success("Login realizado com sucesso!")
+      } else {
+        localStorage.clear();
       }
       
     } catch (err) {

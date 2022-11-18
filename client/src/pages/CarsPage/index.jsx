@@ -1,14 +1,15 @@
 import { BsFilter } from "react-icons/bs";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CarContext } from "../../providers/cars";
 import Card from "../../components/Card";
 import { LoadingOutlined } from "@ant-design/icons";
 
 const CarsPage = () => {
   const { getCars, cars } = useContext(CarContext);
+
   useEffect(() => {
     getCars();
-  });
+  }, []);
 
   return (
     <div className="px-14">

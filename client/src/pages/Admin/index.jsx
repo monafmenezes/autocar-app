@@ -1,24 +1,46 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
 import AdminCard from "../../components/AdminCard";
 import ModalForm from "../../components/ModalForm";
+import ModalProfile from "../../components/ModalProfile";
+import TableCars from "../../components/TableCars";
 import { CarContext } from "../../providers/cars";
+import { captalize } from "../../utils";
 
 const Admin = () => {
-  const { creatCar } = useContext(CarContext);
+  const { getCars, cars } = useContext(CarContext);
   const [openCreate, setOpenCreate] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
-  const [openGet, setOpenget] = useState(false);
+  const [data, setData] = useState([]);
   const update = () => {
     setOpenUpdate(true);
   };
   const create = () => {
     setOpenCreate(true);
   };
-  const get = () => {
-    setOpenget(true);
+
+  useEffect(() => {
+    getCars();
+  }, []);
+
+  const handleCars = () => {
+    const arr = [];
+    cars.forEach((car) => {
+      const item = {
+        key: car.id,
+        model: captalize(car.model),
+        mark: captalize(car.mark),
+        year: car.year,
+        km: car.km,
+        price: car.price,
+      };
+      arr.push(item);
+    });
+    setData(arr);
   };
+
 
   return (
     <>
@@ -27,7 +49,7 @@ const Admin = () => {
         <AdminCard
           type="Buscar veículos"
           car
-          execute={get}
+          execute={handleCars}
           icon={<FaSearch size={30} color="#3374db" />}
         />
         <AdminCard
@@ -37,6 +59,8 @@ const Admin = () => {
         />
       </div>
       <ModalForm open={openCreate} setOpen={setOpenCreate} />
+      <ModalProfile open={openUpdate} setOpen={setOpenUpdate} />
+      <TableCars data={data} />
     </>
   );
 };

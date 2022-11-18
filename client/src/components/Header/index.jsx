@@ -1,13 +1,38 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Search from "antd/lib/transfer/search";
 import { userContext } from "../../providers/User";
 import { useContext } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { IoMdLogOut } from "react-icons/io";
+import authService from "../../Auth";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 const Header = () => {
-  const { user } = useContext(userContext);
+  const { user, getUser, setUser } = useContext(userContext);
+ 
+  const getProfile = async () => {
+    const token = authService.getLoggedUser();
+    if (!token) return;
+    const { sub } = jwt_decode(token);
+    const res = await getUser(sub, token);
+    setUser(res.data);
+    return user;
+  };
+
+  const navigate = useNavigate()
+
+  const logout = () => {
+    localStorage.clear();
+    setUser(null);
+    navigate("/");
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
   let location = useLocation();
-  console.log(location.pathname);
+
   return (
     <header>
       <div className=" w-full mx-auto p-4 px-10 flex justify-between items-center ">
@@ -65,6 +90,14 @@ const Header = () => {
             <FaUserCircle size={20} className="mr-2" />{" "}
             {user ? user.name : "Admin Login"}
           </Link>
+          {user && (
+            <IoMdLogOut
+              className="cursor-pointer hover:scale-105"
+              color="#df4759"
+              onClick={logout}
+              size={20}
+            />
+          )}
         </nav>
       </div>
       <div className="w-full bg-blue">
