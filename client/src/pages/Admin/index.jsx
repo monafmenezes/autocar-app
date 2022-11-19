@@ -24,8 +24,6 @@ const Admin = ({ token }) => {
     return <Navigate to="/" />;
   }
 
-  console.log(token);
-
   const update = () => {
     setOpenUpdate(true);
   };

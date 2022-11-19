@@ -18,6 +18,7 @@ const LoginAdmin = () => {
       const decode = jwt_decode(res.data.token);
       const user = await getUser(decode.sub, res.data.token);
       setUser(user.data);
+      console.debug(user.data.isAdmin)
       if (user.data.isAdmin === true) {
         navigate("/admin");
         toast.success("Login realizado com sucesso!")
