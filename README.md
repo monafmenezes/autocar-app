@@ -40,7 +40,7 @@ senha: 12345678
 
 ```bash
 # Clone este repositório
-$ git clone <git@github.com:monafmenezes/treinadev-app.git>
+$ git clone <git@github.com:monafmenezes/autocar-app.git>
 
 # Acesse a pasta do projeto no terminal
 $ cd treinadev-app
@@ -66,7 +66,7 @@ $ yarn start
 # Clone este repositório
 
 # Acesse a pasta do projeto no terminal
-$ cd treinadev-app
+$ cd autocar-app
 
 # Acesse a pasta client no terminal
 $ cd api
