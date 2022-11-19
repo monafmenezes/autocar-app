@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import { useContext, useState } from "react";
 import { FaTrash } from "react-icons/fa";
-import {SlPicture} from "react-icons/sl"
+import { SlPicture } from "react-icons/sl";
 import { CarContext } from "../../providers/cars";
 import ModalForm from "../ModalForm";
 
@@ -89,7 +89,16 @@ const TableCars = ({ data }) => {
     data && (
       <div className="w-4/5 mx-auto mt-5 p-4">
         <h2 className="font-poppins text-xl">Lista de Veículos</h2>
-        <Table small columns={columns} dataSource={data} />
+        <Table
+          className="font-poppins"
+          small
+          bordered
+          columns={columns}
+          dataSource={data}
+          scroll={{
+            x: "auto",
+          }}
+        />
         <ModalForm open={isModal} setOpen={setIsModal} id={id} setId={setId} />
       </div>
     )

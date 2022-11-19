@@ -2,9 +2,10 @@ import { Button, Input, Modal, Form } from "antd";
 import { useContext } from "react";
 import { useState } from "react";
 import { CarContext } from "../../providers/cars";
+import { SlPicture } from "react-icons/sl";
 
 const ModalForm = ({ open, setOpen, id = null, setId = null }) => {
-  const { createCar, updateCar } = useContext(CarContext);
+  const { createCar, updateCar, getCars } = useContext(CarContext);
   const [file, setFile] = useState(null);
   const up = async (event) => {
     setFile(event.target.files[0]);
@@ -18,9 +19,9 @@ const ModalForm = ({ open, setOpen, id = null, setId = null }) => {
         updateCar(formData, id);
         setOpen(false);
         setId(null);
+        getCars();
         return;
       }
-      formData.append("file", file);
       formData.append("model", model);
       formData.append("mark", mark);
       formData.append("year", year);
@@ -29,6 +30,7 @@ const ModalForm = ({ open, setOpen, id = null, setId = null }) => {
 
       createCar(formData);
       setOpen(false);
+      getCars();
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +68,16 @@ const ModalForm = ({ open, setOpen, id = null, setId = null }) => {
             </Form.Item>
           </>
         )}
-        <input type="file" onChange={(e) => up(e)} />
+        <label className="mb-5">Faça o upload a foto</label>
+        <label htmlFor="upload-file-select">
+          <SlPicture className="cursor-pointer" size={30} color="#ffcc00" />
+          <input
+            className="invisible"
+            id="upload-file-select"
+            type="file"
+            onChange={(e) => up(e)}
+          />
+        </label>
         <Form.Item>
           <Button className="mt-4" type="primary" htmlType="submit" block>
             Enviar

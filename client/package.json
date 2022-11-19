@@ -19,6 +19,12 @@
     "react-toastify": "^9.1.1",
     "web-vitals": "^2.1.0"
   },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/samples": true
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

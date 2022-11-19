@@ -28,7 +28,7 @@ const CarsPage = () => {
         </span>
       </nav>
       {cars ? (
-        <div className="grid grid-cols-4 gap-4 mt-10">
+        <div className="grid md:grid-cols-2 xs:grid-cols-1 lg:grid-cols-4 md:gap-4 mt-10">
           {cars.map((car) => (
             <Card key={car.id} car={car} />
           ))}

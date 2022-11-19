@@ -52,8 +52,8 @@ const Header = () => {
           <Link
             className={
               location.pathname === "/vendas"
-                ? "text-sm font-semibold text-blue"
-                : "text-sm font-semibold text-gray-200"
+                ? "text-sm hidden md:flex font-semibold text-blue"
+                : "text-sm hidden md:flex font-semibold text-gray-200"
             }
             to="/"
           >
@@ -62,8 +62,8 @@ const Header = () => {
           <Link
             className={
               location.pathname === "/fale-conosco"
-                ? "text-sm font-semibold text-blue"
-                : "text-sm font-semibold text-gray-200"
+                ? "text-sm hidden md:flex font-semibold text-blue"
+                : "text-sm  hidden md:flex font-semibold text-gray-200"
             }
             to="/"
           >
@@ -72,8 +72,8 @@ const Header = () => {
           <Link
             className={
               location.pathname === "/about"
-                ? "text-sm font-semibold text-blue"
-                : "text-sm font-semibold text-gray-200"
+                ? "text-sm hidden md:flex font-semibold text-blue"
+                : "text-sm hidden md:flex font-semibold text-gray-200"
             }
             to="/"
           >

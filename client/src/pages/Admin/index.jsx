@@ -44,7 +44,7 @@ const Admin = () => {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-1 px-52 pt-20">
+      <div className="grid sm:grid-cols-1 sm:items-center lg:grid-cols-3 gap-1 lg:px-52 pt-20">
         <AdminCard type="Adicionar veículo" car execute={create} />
         <AdminCard
           type="Buscar veículos"
