@@ -59,6 +59,9 @@ $ yarn start
 
 ### 🎲 Rodando o Backend(Node.js)
 
+##### O banco utilizado no backend foi o postgres, houve a criação de duas tabelas: User e Car. Utilizado Express e TypeORM. Já está com um banco configurado e rodando online, as variáveis de ambiente estão no .envexemple. O nome das imagens são persistidas no banco de dados e em seguida elas são enviadas para a S3 da AWS. O arquivo json do insomnia também foi enviado e está configurado para rodar no localhost:8000. Como não foi realizado o deploy da api, antes de rodar o front é necessário rodar a api. Só precisa criar as migrations caso use o outro url enviado no envexemple. 
+
+
 ```bash
 # Clone este repositório
 
