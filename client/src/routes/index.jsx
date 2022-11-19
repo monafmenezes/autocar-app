@@ -5,7 +5,9 @@ import CarsPage from "../pages/CarsPage";
 import LoginAdmin from "../pages/LoginAdmin";
 
 const RoutesPages = () => {
-  const token = authService.getLoggedUser();
+
+  const token = JSON.stringify(authService.getLoggedUser());
+
   return (
     <Routes>
       <Route path="/carros-usados" element={<CarsPage />} />
