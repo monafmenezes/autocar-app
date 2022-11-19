@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
+import { Navigate } from "react-router-dom";
 import AdminCard from "../../components/AdminCard";
 import ModalForm from "../../components/ModalForm";
 import ModalProfile from "../../components/ModalProfile";
@@ -9,21 +10,28 @@ import TableCars from "../../components/TableCars";
 import { CarContext } from "../../providers/cars";
 import { captalize } from "../../utils";
 
-const Admin = () => {
+const Admin = ({ token }) => {
   const { getCars, cars } = useContext(CarContext);
   const [openCreate, setOpenCreate] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
   const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getCars();
+  }, []);
+  
+  if (!token) {
+    return <Navigate to="/" />;
+  }
+
+  console.log(token);
+
   const update = () => {
     setOpenUpdate(true);
   };
   const create = () => {
     setOpenCreate(true);
   };
-
-  useEffect(() => {
-    getCars();
-  }, []);
 
   const handleCars = () => {
     const arr = [];
@@ -40,7 +48,6 @@ const Admin = () => {
     });
     setData(arr);
   };
-
 
   return (
     <>
