@@ -8,6 +8,7 @@ const carsCreateService = async ({
   mark,
   model,
   year,
+  price,
   filename,
 }: ICarCreate) => {
   const carRepository = AppDataSource.getRepository(Car);
@@ -19,7 +20,7 @@ const carsCreateService = async ({
   car.mark = mark;
   car.year = year;
   car.km = parseInt(km);
-
+  car.price = parseInt(price);
   car.photo = filename.filename;
 
   carRepository.create(car);

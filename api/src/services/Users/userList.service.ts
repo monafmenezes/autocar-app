@@ -8,7 +8,7 @@ const userListService = async ({ id }: IUserId) => {
   const user = await userRepository.findOne({ where: { id } });
 
   if (!user) throw new AppError("Id not found.", 404);
-  
+ 
   return user;
 };
 

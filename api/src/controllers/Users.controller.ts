@@ -17,13 +17,12 @@ export default class UserController {
   static async login(req: Request, res: Response) {
     const {email, password} = req.body;
     const login = await userLogin({email, password})
-    return res.json(login);
+    return res.status(200).json(login);
   }
 
   static async index(req: Request, res: Response) {
     const users = await listUsersService();
-
-    return res.json(users);
+    return res.status(200).json(users);
   }
 
   static async list(req: Request, res: Response) {
@@ -31,7 +30,7 @@ export default class UserController {
 
     const user = await listUserService({ id });
 
-    return res.json(user);
+    return res.status(200).json(user);
   }
 
   static async update(req: Request, res: Response) {

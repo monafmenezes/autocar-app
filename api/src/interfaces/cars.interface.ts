@@ -3,7 +3,8 @@ export interface ICarCreate {
   model: string;
   year: string;
   km: string;
-  filename:  Express.Multer.File;
+  price: string;
+  filename: Express.Multer.File;
 }
 
 export interface ICar extends ICarCreate {
@@ -11,12 +12,8 @@ export interface ICar extends ICarCreate {
 }
 
 export interface ICarUpdate {
-  mark: string;
-  model: string;
-  filename:Express.Multer.File;
-  year: string;
-  km: string;
   id: string;
+  filename: Express.Multer.File;
 }
 
 export interface ICarId {

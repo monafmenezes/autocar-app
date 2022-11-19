@@ -1,0 +1,511 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Autocar API Documentation",
+    "description": "API utilizada no backend do site de venda de automóveis Autocar",
+    "version": 1.0,
+    "contact": {
+      "email": "monafmenezesdev@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000/",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "summary": "Cadastro de novos usuários",
+        "description": "Essa rota será responsável por cadastrar usuários dos tipos admin e não admin",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Monalisa Menezes",
+                    "email": "monafmenezes@email.com",
+                    "password": "senha123",
+                    "isAdmin": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "409": {
+            "description": "Já existe o email escolhido."
+          },
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista todos os usuários",
+        "description": "Essa rota será responsavel por listar todos os usuários",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Token de autenticação inexistente."
+          },
+          "401": {
+            "description": "Token inválido."
+          },
+          "403": {
+            "description": "Acesso negado - necessário ser Administrador."
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "summary": "Lista um usuário através da Id",
+        "description": "Essa rota será responsavel por listar um usuário através da Id",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do usuário",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Id não localizado."
+          },
+          "401": {
+            "description": "Token inválido."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Atualiza um usuário",
+        "description": "Essa rota será responsavel por atualizar um usuário através da Id",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do usuário",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Monalisa Menezes",
+                    "password": "senha123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Users"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Id não localizado."
+          },
+          "401": {
+            "description": "Token inválido."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deleta um usuário",
+        "description": "Essa rota será responsavel por deletar um usuário através da Id",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do usuário",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Id não localizado."
+          },
+          "401": {
+            "description": "Token inválido."
+          },
+          "403": {
+            "description": "Acesso negado - necessário ser Administrador."
+          }
+        }
+      }
+    },
+    "user/login": {
+      "summary": "Login de usuário",
+      "description": "Essa rota será responsável pelo login de usuários",
+      "tags": ["User"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            },
+            "examples": {
+              "login": {
+                "value": {
+                  "email": "usuario@email.com",
+                  "password": "12345678"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": {
+          "description": "OK",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "Usuário ou senha inválidos"
+        }
+      }
+    },
+    "/car": {
+      "post": {
+        "summary": "Cadastro de novos Carros",
+        "description": "Essa rota será responsável por cadastrar novos Carros",
+        "tags": ["Car"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              },
+              "examples": {
+                "car": {
+                  "value": {
+                    "model": "Uno",
+                    "mark": "Fiat",
+                    "year": "2018",
+                    "km": "55000",
+                    "price": 29.0,
+                    "filename": "File"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Token de autenticação inexistente."
+          },
+          "401": {
+            "description": "Token inválido."
+          },
+          "403": {
+            "description": "Acesso negado - necessário ser Administrador."
+          }
+        }
+      },
+      "get": {
+        "summary": "Lista todos os Carros",
+        "description": "Essa rota será responsavel por listar todos os Carros",
+        "tags": ["Car"],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Token de autenticação inexistente."
+          },
+          "401": {
+            "description": "Token inválido."
+          }
+        }
+      }
+    },
+    "/car/{id}": {
+      "get": {
+        "summary": "Lista um carro através do Id",
+        "description": "Essa rota será responsavel por listar um carro através da Id",
+        "tags": ["Car"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do carro",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Id não localizado."
+          },
+          "401": {
+            "description": "Token inválido."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Atualiza a foto de um carro",
+        "description": "Essa rota será responsável por atualizar a foto de um carro",
+        "tags": ["Car"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do Carro",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Car"
+              },
+              "examples": {
+                "car": {
+                  "value": {
+                    "filename": "file"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Car"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Id não localizado."
+          },
+          "401": {
+            "description": "Token inválido."
+          }
+        },
+        "403": {
+          "description": "Acesso negado - necessário ser Administrador."
+        }
+      },
+      "delete": {
+        "summary": "Deleta um carro",
+        "description": "Essa rota será responsavel por deletar um carro através da Id",
+        "tags": ["Car"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do carro",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          },
+          "404": {
+            "description": "Id não localizado."
+          },
+          "401": {
+            "description": "Token inválido."
+          },
+          "403": {
+            "description": "Acesso negado - necessário ser Administrador."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Car": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string"
+          },
+          "mark": {
+            "type": "string"
+          },
+          "year": {
+            "type": "string"
+          },
+          "km": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "File"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
