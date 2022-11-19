@@ -37,7 +37,7 @@ const ModalForm = ({ open, setOpen, id = null, setId = null }) => {
   };
   return (
     <Modal
-      title={id ? "Insira as novas informações" : "Adicione uma nova foto"}
+      title={id ? "Adicione uma nova foto" : "Insira as novas informações"}
       open={open}
       onCancel={() => setOpen(false)}
       footer={[]}
