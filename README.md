@@ -6,9 +6,11 @@
 </h3>
 <p align="center">🚀 E-commerce de veículos, com login da página de administrador com autenticação através de token e que pode adicionar novos veículos, com upload de imagens na S3 da AWS.</p>
 
-```Usuário Adminstrador para teste: 
+``` Usuário Adminstrador para teste: 
 email: adminautocar@email.com
-senha: 12345678```
+senha: 12345678 ```
+
+
 
 ### ✅ Features
 
