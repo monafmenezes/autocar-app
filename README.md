@@ -43,7 +43,7 @@ senha: 12345678
 $ git clone <git@github.com:monafmenezes/autocar-app.git>
 
 # Acesse a pasta do projeto no terminal
-$ cd treinadev-app
+$ cd autocar-app
 
 # Acesse a pasta client no terminal
 $ cd client
